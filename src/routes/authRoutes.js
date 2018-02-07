@@ -12,9 +12,9 @@ var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var authRouter = express.Router();
 
-var client_id = 'CLIENT_ID'; // Your client id
-var client_secret = 'CLIENT_SECRET'; // Your secret
-var redirect_uri = 'REDIRECT_URI'; // Your redirect uri
+var client_id = '6197353cc3ae4b80b14c41cbd3ae7713'; // App client id
+var client_secret = 'fbe0f6e03e7640f3b8a0b9ae6566224b'; // App secret
+var redirect_uri = 'http://localhost:3000'; // Your redirect uri
 
 
 /**
