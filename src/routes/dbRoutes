@@ -1,0 +1,56 @@
+var express = require('express');
+var dbRouter = express.Router();
+
+var router = () => {
+    // Retrieving data from database
+    dbRouter.route('/get_route')
+        .get((req, res, next) => {
+            res.send('get route tested');
+        });
+
+// Inserting data into database
+    dbRouter.route('/post_route')
+        .post((req, res, next) => {
+            // TODO
+        });
+
+// Updating data in database
+    dbRouter.route('/put_route')
+        .put((req, res, next) => {
+            // TODO
+        });
+
+// Deleting data in database
+    dbRouter.route('/delete_route')
+        .delete((req, res, next) => {
+            // TODO
+        });
+
+
+    /*// Retrieving data from database
+     dbRouter.get('/get_route', (req, res, next) => {
+     res.send('get route tested');
+     });
+
+     // Inserting data into database
+     dbRouter.post('/post_route', (req, res, next) => {
+     // TODO
+     });
+
+     // Updating data in database
+     dbRouter.put('/put_route', (req, res, next) => {
+     // TODO
+     });
+
+     // Deleting data in database
+     dbRouter.delete('/delete_route', (req, res, next) => {
+     // TODO
+     });*/
+
+    return dbRouter;
+};
+
+
+
+
+module.exports = router;
