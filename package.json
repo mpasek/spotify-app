@@ -18,7 +18,13 @@
   },
   "homepage": "https://github.com/mpasek/spotify-app#readme",
   "devDependencies": {
-    "gulp": "^3.9.1"
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "gulp": "^3.9.1",
+    "gulp-jscs": "^4.1.0",
+    "gulp-jshint": "^2.1.0",
+    "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
