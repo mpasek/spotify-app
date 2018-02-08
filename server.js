@@ -28,9 +28,9 @@ mongoose.connection.on('error', (err) => {
     console.log(err);
 });
 
-app.use(express.static('public'));
-/*app.use(express.static(__dirname + '/public'))
-    .use(cookieParser());*/
+//app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'))
+    .use(cookieParser());
 app.use(express.static('src/views'));
 
 app.use(cors());
