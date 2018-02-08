@@ -1,27 +1,46 @@
 var express = require('express');
 var dbRouter = express.Router();
 
+const Track = require('../models/savedTrack');
+
 var router = () => {
     // Retrieving data from database
-    dbRouter.route('/get_route')
+    dbRouter.route('/tracks')
         .get((req, res, next) => {
-            res.send('get route tested');
+            Track.find((err, tracks) => {
+                if(err) {
+                    res.json(err);
+                } else {
+                    res.json(tracks);
+                }
+            })
         });
 
 // Inserting data into database
-    dbRouter.route('/post_route')
+    dbRouter.route('/track')
         .post((req, res, next) => {
-            // TODO
+            let newTrack = new Track({
+                trackName: req.body.trackName,
+                artistName: req.body.artistName,
+                dateAdded: req.body.dateAdded
+            });
+            newTrack.save((err, track) => {
+                if(err) {
+                    res.json(err);
+                } else {
+                    res.json({msg: 'Track added successfully'});
+                }
+            });
         });
 
 // Updating data in database
-    dbRouter.route('/put_route')
+    dbRouter.route('/db_put')
         .put((req, res, next) => {
             // TODO
         });
 
 // Deleting data in database
-    dbRouter.route('/delete_route')
+    dbRouter.route('/db_delete')
         .delete((req, res, next) => {
             // TODO
         });
