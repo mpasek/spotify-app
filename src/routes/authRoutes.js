@@ -14,7 +14,7 @@ var authRouter = express.Router();
 
 var client_id = '6197353cc3ae4b80b14c41cbd3ae7713'; // App client id
 var client_secret = 'fbe0f6e03e7640f3b8a0b9ae6566224b'; // App secret
-var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
+var redirect_uri = 'http://localhost:4200/user'; // Your redirect uri
 
 
 /**
