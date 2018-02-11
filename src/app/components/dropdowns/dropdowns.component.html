@@ -1,0 +1,23 @@
+<div>
+  <label>Options:</label>
+  <select [(ngModel)]="selectedOption.id" (change)="onSelect($event.target.value)">
+    <option value="0">-- Select Option --</option>
+    <option *ngFor="let option of options" value={{option.id}}>{{option.name}}</option>
+  </select>
+</div>
+
+<br/><br/>
+
+<div>
+  <label>Time Range:</label>
+  <select>
+    <option *ngIf='selectedOption.id == 0' value="0">-- Select Time Range --</option>
+    <option *ngFor="let timeframe of timeframes " value={{timeframe.id}}>{{timeframe.name}}</option>
+  </select>
+</div>
+
+<br/><br/>
+
+<div>
+  <a routerLink="/preview"><button class="btn btn-success pull-right" >Aggregate</button></a>
+</div>

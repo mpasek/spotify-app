@@ -2,7 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyparser = require('body-parser');
 var cors = require('cors');
-var cookieParser = require('cookie-parser');
+/*var cookieParser = require('cookie-parser');*/
 
 var app = express();
 
@@ -28,9 +28,9 @@ mongoose.connection.on('error', (err) => {
     console.log(err);
 });
 
-//app.use(express.static('public'));
-app.use(express.static(__dirname + '/public'))
-    .use(cookieParser());
+app.use(express.static(__dirname + 'public'));
+/*app.use(express.static(__dirname + '/public'))
+    .use(cookieParser());*/
 //app.use(express.static('src/views'));
 app.use(express.static('src'));
 

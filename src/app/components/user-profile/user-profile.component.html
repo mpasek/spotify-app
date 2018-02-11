@@ -1,3 +1,21 @@
-<p>
-  USER
-</p>
+<div id="user-profile">
+  <h1>{{user.displayName}}</h1>
+  <div class="media">
+    <div class="pull-left">
+      <img class="media-object" width="150" src="{{user.image.url}}" />
+    </div>
+    <div class="media-body">
+      <ul class="ul-horizontal">
+        <li>Display name: {{user.displayName}}</li>
+        <li>Id: {{user.id}}</li>
+        <li>Top Artists: </li><a href="">{{user.topArtists}}</a>
+        <li>Top Tracks: </li><a href="">{{user.topTracks}}</a>
+        <a routerLink="/aggregatr"><button class="btn btn-success pull-right" >Make Playlists</button></a>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+
