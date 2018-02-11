@@ -5,12 +5,12 @@ import { User } from '../../User';
 import 'rxjs/Rx';
 import {Option} from "../../Option";
 import {Timeframe} from "../../Timeframe";
+import {Track} from "../../Track";
 
 @Injectable()
 export class SpotifyService {
   private baseUrl: string = 'https://api.spotify.com/v1/me';
   private clientUrl: string = 'http://localhost:4200';
-  private userUrl: string;
   private accessToken: string;
   private user: User;
 
@@ -18,53 +18,9 @@ export class SpotifyService {
 
   }
 
-
-
-  /*getUserInfo(user: User){
-    let url = this.baseUrl;
-    this.accessToken = user.accessToken;
-
-    let headers = new Headers();
-    headers.append('Authorization', 'Bearer '+ this.accessToken);
-
-    /!*let headers = new Headers({ 'Content-Type': 'application/json' },{'Authorization': this.accessToken}); // ... Set content type to JSON
-    let options = new RequestOptions({ headers: headers }); // Create a request option*!/
-    return this._http.get(url, {headers})
-      .map(res => res.json());
-
-
-  }*/
-
-  /*getUserInfo(user: User) {
-    this.accessToken = user.accessToken;
-    let url = this.baseUrl;
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.accessToken = user.accessToken;
-    headers.append('Authorization', `Bearer ` + this.accessToken);
-
-
-
-    return this._http
-      .get(url, headers )
-      .map(res => res.json());
-  }*/
-
-
-
-  /*getUserInfo(user: User){
-    this.accessToken = user.accessToken;
-    let url = this.baseUrl;
-    let headers = new Headers();
-    headers.append('Authorization' , 'Bearer ' + this.accessToken);
-    return this._http.get(url, {headers: headers})
-      .map((res: Response) => res.json());
-  }*/
-
   getUserInfo(user: User) {
     let url = this.baseUrl;
     this.accessToken = user.accessToken;
-    console.log("Auth token: " + this.accessToken);
 
     let options = {
       method: 'GET',
@@ -75,7 +31,6 @@ export class SpotifyService {
 
     fetch(url, options)
       .then(res => res.json())
-      /*.then(res => console.log(res))*/
       .then(function(res) {
         user.displayName = res.display_name;
         user.externalUrl = res.external_urls.spotify;
@@ -84,16 +39,65 @@ export class SpotifyService {
         user.image = res.images[0];
         user.uri = res.uri;
         user.path = '/user/' + res.id;
-        console.log(user.path);
       });
-    
+
     this.user = user;
   }
-  
+
   getUser() {
     return this.user;
   }
 
+  getUserTopArtists() {
+    let artistsUrl = this.baseUrl + '/top/artists?limit=10&offset=0';
+
+    /*let options = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ` + this.accessToken
+      }
+    };
+
+    fetch(artistsUrl, options)
+      .then(res => res.json())
+      .then(function(res) {
+        console.log(res);
+      });*/
+
+    let authString = 'Bearer ' + this.accessToken;
+
+    /*let options = {
+      'Content-Type': 'application/json',
+      'Authorization': authString
+    };*/
+
+    let headers = new HttpHeaders();
+
+    console.log(authString);
+    headers = headers.append('Content-Type', 'application/json');
+    headers = headers.append('Authorization', authString);
+    console.log(headers);
+
+    return this._http
+      .get(artistsUrl, {headers: headers} )
+      .map(res => res.json());
+
+
+
+
+  }
+
+  getTopTracks() {
+    let tracksUrl = this.baseUrl + '/top/tracks?limit=10&offset=0';
+    return this._http.get(tracksUrl)
+      .map((res:Response) => res.json)
+  }
+
+  getSavedTracks() {
+    let savedTracksUrl = this.baseUrl + '/tracks?limit=10&offset=0';
+    return this._http.get(savedTracksUrl)
+      .map((res:Response) => res.json)
+  }
 
   getOptions() {
     return [
@@ -134,16 +138,48 @@ export class SpotifyService {
   }
 
 
-  /*getTopArtists() {
 
-  }
 
-  getTopTracks() {
 
-  }
+  /*getUserInfo(user: User){
+   let url = this.baseUrl;
+   this.accessToken = user.accessToken;
 
-  getNumberOfSavedTracks() {
+   let headers = new Headers();
+   headers.append('Authorization', 'Bearer '+ this.accessToken);
 
-  }*/
+   /!*let headers = new Headers({ 'Content-Type': 'application/json' },{'Authorization': this.accessToken}); // ... Set content type to JSON
+   let options = new RequestOptions({ headers: headers }); // Create a request option*!/
+   return this._http.get(url, {headers})
+   .map(res => res.json());
+
+
+   }*/
+
+  /*getUserInfo(user: User) {
+   this.accessToken = user.accessToken;
+   let url = this.baseUrl;
+   var headers = new Headers();
+   headers.append('Content-Type', 'application/json');
+   this.accessToken = user.accessToken;
+   headers.append('Authorization', `Bearer ` + this.accessToken);
+
+
+
+   return this._http
+   .get(url, headers )
+   .map(res => res.json());
+   }*/
+
+
+
+  /*getUserInfo(user: User){
+   this.accessToken = user.accessToken;
+   let url = this.baseUrl;
+   let headers = new Headers();
+   headers.append('Authorization' , 'Bearer ' + this.accessToken);
+   return this._http.get(url, {headers: headers})
+   .map((res: Response) => res.json());
+   }*/
 
 }

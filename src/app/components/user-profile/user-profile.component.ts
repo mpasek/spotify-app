@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 import {User} from "../../../User";
+import {Track} from "../../../Track";
 
 @Component({
   selector: 'user-profile',
@@ -9,6 +10,11 @@ import {User} from "../../../User";
 })
 export class UserProfileComponent implements OnInit {
   private user: User;
+
+  artistRes: any;
+
+  topArtists: any[];
+  topTracks: Track[];
 
   constructor(private _spotifyService: SpotifyService) {
 
@@ -25,7 +31,7 @@ export class UserProfileComponent implements OnInit {
 
     */
     this.user = this._spotifyService.getUser();
-    this.getTopArtists(this.user);
+    this.getTopArtists();
     this.getTopTracks(this.user);
     this.getNumberOfSavedTracks(this.user);
   }
@@ -34,8 +40,16 @@ export class UserProfileComponent implements OnInit {
     return this.user;
   }
 
-  getTopArtists(user: User) {
-    // TODO
+  getTopArtists() {
+    this._spotifyService.getUserTopArtists()
+      .subscribe(res => {
+        this.artistRes = res;
+        console.log("Artists: " + this.artistRes);
+      });
+
+    //this.topArtists = this.artistRes.items;
+    //console.log(this.artistRes.limit);
+    console.log("JSON: " + this.artistRes);
   }
 
   getTopTracks(user: User) {
