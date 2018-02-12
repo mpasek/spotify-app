@@ -9,7 +9,7 @@ import {User} from "../../../User";
 })
 export class InfoComponent implements OnInit {
   private _accessToken: string;
-  private user: User;
+  user: User;
   userPath: string;
 
   constructor(private _spotifyService: SpotifyService) {
@@ -30,7 +30,6 @@ export class InfoComponent implements OnInit {
     this._spotifyService.getUserInfo(this.user);
     this.user = this._spotifyService.getUser();
     this.userPath = this.user.path;
-    console.log(this.userPath);
   }
 
 }

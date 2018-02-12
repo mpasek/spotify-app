@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { trigger, state, style, stagger, transition, animate, query, keyframes } from '@angular/animations';
 import { SpotifyService } from '../../services/spotify.service';
 import {User} from "../../../User";
 import {Track} from "../../../Track";
@@ -7,35 +8,63 @@ import 'rxjs/Rx';
 @Component({
   selector: 'user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
+  animations: [
+    trigger('artistsEnter', [
+      transition('* => *', [
+
+        query(':enter', style({ opacity: 0 }), {optional: true}),
+
+        query(':enter', stagger('400ms', [
+          animate('1000ms ease-in', keyframes([
+            style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
+            style({opacity: .5, transform: 'translateY(35px)',  offset: 0.3}),
+            style({opacity: 1, transform: 'translateY(0)',     offset: 1.0}),
+          ]))]), {optional: true})
+      ])
+    ]),
+    trigger('tracksEnter', [
+      transition('* => *', [
+
+        query(':enter', style({ opacity: 0 }), {optional: true}),
+
+        query(':enter', stagger('500ms', [
+          animate('2000ms ease-in', keyframes([
+            style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
+            style({opacity: .5, transform: 'translateY(35px)',  offset: 0.3}),
+            style({opacity: 1, transform: 'translateY(0)',     offset: 1.0}),
+          ]))]), {optional: true})
+      ])
+    ])
+  ],
 })
 export class UserProfileComponent implements OnInit {
-  private user: User;
+  user: User;
+  animationInitialized: boolean = false;
 
   artistRes: any;
+  tracksRes: any;
+  numberSavedRes: any;
+  savedRes: any;
+
   items: any;
+  trackItems: any;
+  numberOfSaved: number;
+  tracks: any;
 
   topArtists: any[];
   topTracks: Track[];
+  savedTracks: Track[];
 
   constructor(private _spotifyService: SpotifyService) {
 
   }
 
   ngOnInit() {
-    /*
-    // Gets access token from url
-    let urlParams = new URLSearchParams(window.location.search);
-    this._accessToken = urlParams.get('access_token');
-
-    // Pass auth token to User object
-    this.user.accessToken = this._accessToken;
-
-    */
     this.user = this._spotifyService.getUser();
     this.getTopArtists();
-    this.getTopTracks(this.user);
-    this.getNumberOfSavedTracks(this.user);
+    this.getTopTracks();
+    this.getNumberOfSavedTracks();
   }
 
   getUserInfo() {
@@ -52,12 +81,25 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  getTopTracks(user: User) {
-    // TODO
+  getTopTracks() {
+    this._spotifyService.getUserTopTracks()
+      .subscribe((res) => {
+        console.log(res);
+        this.tracksRes = res;
+        this.trackItems = res['items'];
+        console.log(this.trackItems);
+      });
   }
 
-  getNumberOfSavedTracks(user: User) {
-    // TODO
+  getNumberOfSavedTracks() {
+    this._spotifyService.getNumberOfSavedTracks()
+      .subscribe((res) => {
+        console.log(res);
+        this.numberSavedRes = res;
+        this.user.totalSaved = res['total'];
+        this.numberOfSaved = this.user.totalSaved;
+        console.log(this.numberOfSaved);
+      });
   }
 
 

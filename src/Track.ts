@@ -3,4 +3,5 @@ export class Track {
   artist: string;
   duration: number;
   uri: string;
+  previewUrl: string;
 }

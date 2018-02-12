@@ -1,32 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Headers } from '@angular/http';
 import { User } from '../../User';
 import 'rxjs/add/operator/map';
-import {Observable} from "rxjs";
 import {Option} from "../../Option";
 import {Timeframe} from "../../Timeframe";
-import {Track} from "../../Track";
 
 @Injectable()
 export class SpotifyService {
-  private baseUrl: string = 'https://api.spotify.com/v1/me';
-  private clientUrl: string = 'http://localhost:4200';
-  private accessToken: string;
-  private user: User;
+  private _baseUrl: string = 'https://api.spotify.com/v1/me';
+  private _clientUrl: string = 'http://localhost:4200';
+  private _accessToken: string;
+  private _authString: string;
+  private _headers: HttpHeaders;
+  private _user: User;
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private _http: HttpClient) { }
 
   getUserInfo(user: User) {
-    let url = this.baseUrl;
-    this.accessToken = user.accessToken;
+    let url = this._baseUrl;
+
+    this._accessToken = user.accessToken;
+    this._authString = 'Bearer ' + this._accessToken;
+    this._headers = new HttpHeaders();
+    this._headers = this._headers.append('Content-Type', 'application/json');
+    this._headers = this._headers.append('Authorization', this._authString);
 
     let options = {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ` + this.accessToken
+        'Authorization': `Bearer ` + this._accessToken
       }
     };
 
@@ -42,59 +44,32 @@ export class SpotifyService {
         user.path = '/user/' + res.id;
       });
 
-    this.user = user;
+    this._user = user;
   }
 
   getUser() {
-    return this.user;
+    return this._user;
   }
 
   getUserTopArtists(){
-    let artistsUrl = this.baseUrl + '/top/artists?limit=10&offset=0';
-
-    /*let options = {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ` + this.accessToken
-      }
-    };
-
-    fetch(artistsUrl, options)
-      .then(res => res.json())
-      .then(function(res) {
-        console.log(res);
-      });*/
-
-    let authString = 'Bearer ' + this.accessToken;
-    let headers = new HttpHeaders();
-
-    console.log(authString);
-    headers = headers.append('Content-Type', 'application/json');
-    headers = headers.append('Authorization', authString);
-    console.log(headers);
-
-    return this.http
-      .get(artistsUrl, {headers: headers} );
-      //.map(res => res.json());
-
-
-
-
-
-
+    let artistsUrl = this._baseUrl + '/top/artists?limit=10&offset=0';
+    return this._http
+      .get(artistsUrl, {headers: this._headers});
   }
 
-  getTopTracks() {
-    let tracksUrl = this.baseUrl + '/top/tracks?limit=10&offset=0';
-    return this.http.get(tracksUrl)
-      .map((res:Response) => res.json)
+  getUserTopTracks() {
+    let tracksUrl = this._baseUrl + '/top/tracks?limit=10&offset=0';
+    return this._http
+      .get(tracksUrl, {headers: this._headers});
   }
 
-  getSavedTracks() {
-    let savedTracksUrl = this.baseUrl + '/tracks?limit=10&offset=0';
-    return this.http.get(savedTracksUrl)
-      .map((res:Response) => res.json)
+  getNumberOfSavedTracks() {
+    let savedTracksUrl = this._baseUrl + '/tracks?limit=1&offset=0';
+    return this._http
+      .get(savedTracksUrl, {headers: this._headers});
   }
+
+
 
   getOptions() {
     return [
@@ -133,41 +108,6 @@ export class SpotifyService {
       new Timeframe(25, 2, '2018' ),
     ];
   }
-
-
-
-
-
-  /*getUserInfo(user: User){
-   let url = this.baseUrl;
-   this.accessToken = user.accessToken;
-
-   let headers = new Headers();
-   headers.append('Authorization', 'Bearer '+ this.accessToken);
-
-   /!*let headers = new Headers({ 'Content-Type': 'application/json' },{'Authorization': this.accessToken}); // ... Set content type to JSON
-   let options = new RequestOptions({ headers: headers }); // Create a request option*!/
-   return this._http.get(url, {headers})
-   .map(res => res.json());
-
-
-   }*/
-
-  /*getUserInfo(user: User) {
-   this.accessToken = user.accessToken;
-   let url = this.baseUrl;
-   var headers = new Headers();
-   headers.append('Content-Type', 'application/json');
-   this.accessToken = user.accessToken;
-   headers.append('Authorization', `Bearer ` + this.accessToken);
-
-
-
-   return this._http
-   .get(url, headers )
-   .map(res => res.json());
-   }*/
-
 
 
   /*getUserInfo(user: User){

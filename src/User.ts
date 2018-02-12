@@ -5,6 +5,7 @@ export class User {
   href: string;
   id: string;
   image: any;
+  totalSaved: number;
   uri: string;
   path: string;
 }
