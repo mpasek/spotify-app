@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
 import {User} from "../../../User";
 import {Track} from "../../../Track";
+import 'rxjs/Rx';
 
 @Component({
   selector: 'user-profile',
@@ -12,6 +13,7 @@ export class UserProfileComponent implements OnInit {
   private user: User;
 
   artistRes: any;
+  items: any;
 
   topArtists: any[];
   topTracks: Track[];
@@ -42,14 +44,12 @@ export class UserProfileComponent implements OnInit {
 
   getTopArtists() {
     this._spotifyService.getUserTopArtists()
-      .subscribe(res => {
+      .subscribe((res) => {
+        console.log(res);
         this.artistRes = res;
-        console.log("Artists: " + this.artistRes);
+        this.items = res['items'];
       });
 
-    //this.topArtists = this.artistRes.items;
-    //console.log(this.artistRes.limit);
-    console.log("JSON: " + this.artistRes);
   }
 
   getTopTracks(user: User) {

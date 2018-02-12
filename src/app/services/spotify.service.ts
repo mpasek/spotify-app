@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers } from '@angular/http';
 import { User } from '../../User';
-import 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import {Observable} from "rxjs";
 import {Option} from "../../Option";
 import {Timeframe} from "../../Timeframe";
 import {Track} from "../../Track";
@@ -14,7 +15,7 @@ export class SpotifyService {
   private accessToken: string;
   private user: User;
 
-  constructor(private _http: HttpClient) {
+  constructor(private http: HttpClient) {
 
   }
 
@@ -48,7 +49,7 @@ export class SpotifyService {
     return this.user;
   }
 
-  getUserTopArtists() {
+  getUserTopArtists(){
     let artistsUrl = this.baseUrl + '/top/artists?limit=10&offset=0';
 
     /*let options = {
@@ -65,12 +66,6 @@ export class SpotifyService {
       });*/
 
     let authString = 'Bearer ' + this.accessToken;
-
-    /*let options = {
-      'Content-Type': 'application/json',
-      'Authorization': authString
-    };*/
-
     let headers = new HttpHeaders();
 
     console.log(authString);
@@ -78,9 +73,11 @@ export class SpotifyService {
     headers = headers.append('Authorization', authString);
     console.log(headers);
 
-    return this._http
-      .get(artistsUrl, {headers: headers} )
-      .map(res => res.json());
+    return this.http
+      .get(artistsUrl, {headers: headers} );
+      //.map(res => res.json());
+
+
 
 
 
@@ -89,13 +86,13 @@ export class SpotifyService {
 
   getTopTracks() {
     let tracksUrl = this.baseUrl + '/top/tracks?limit=10&offset=0';
-    return this._http.get(tracksUrl)
+    return this.http.get(tracksUrl)
       .map((res:Response) => res.json)
   }
 
   getSavedTracks() {
     let savedTracksUrl = this.baseUrl + '/tracks?limit=10&offset=0';
-    return this._http.get(savedTracksUrl)
+    return this.http.get(savedTracksUrl)
       .map((res:Response) => res.json)
   }
 

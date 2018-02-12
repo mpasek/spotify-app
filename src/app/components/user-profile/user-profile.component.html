@@ -6,8 +6,10 @@
     </div>
     <div class="media-body">
       <ul class="ul-horizontal">
-        <li>Top Artists: </li><a href="">{{user.topArtists}}</a>
-        <li>Top Tracks: </li><a href="">{{user.topTracks}}</a>
+        <h2>Top Artists</h2>
+        <li *ngFor="let item of items"><a href="{{item.href}}">{{item.name}}</a></li>
+        <h2>Top Tracks</h2>
+        <li *ngFor="let item of items"><a href="{{item.href}}">{{item.name}}</a></li>
         <a routerLink="/aggregatr"><button class="btn btn-success pull-right" >Make Playlists</button></a>
       </ul>
     </div>
