@@ -1,7 +1,35 @@
-<div>
+<div class="container">
+  <h4 class="title">{{name}} Dynamic Forms: Dependent Dropdown
+  </h4>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let control of controls" class="form-row">
+      <dynamic-control [input]="control" [form]="form">
+      </dynamic-control>
+    </div>
+    <div class="form-row">
+      <!--<button type="submit" class="btn btn-success" [disabled]="!form.valid">Save</button>-->
+      <a routerLink="/preview"><button class="btn btn-outline-primary" [disabled]="!form.valid" >Aggregate</button></a>
+    </div>
+  </form>
+  <pre>{{form.value | json }}
+</pre>
+  <div *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong>
+    <br>{{payLoad}}
+  </div>
+  <p>Submitted data:
+  </p>
+  <pre>{{ submittedData | json }}
+</pre>
+</div>
+
+
+
+
+<!--<div>
   <label>Options:</label>
   <select [(ngModel)]="selectedOption.id" (change)="onSelect($event.target.value)">
-    <option value="0">-- Select Option --</option>
+    <option value="0">&#45;&#45; Select Option &#45;&#45;</option>
     <option *ngFor="let option of options" value={{option.id}}>{{option.name}}</option>
   </select>
 </div>
@@ -11,7 +39,7 @@
 <div>
   <label>Time Range:</label>
   <select>
-    <option *ngIf='selectedOption.id == 0' value="0">-- Select Time Range --</option>
+    <option *ngIf='selectedOption.id == 0' value="0">&#45;&#45; Select Time Range &#45;&#45;</option>
     <option *ngFor="let timeframe of timeframes " value={{timeframe.id}}>{{timeframe.name}}</option>
   </select>
 </div>
@@ -20,4 +48,6 @@
 
 <div>
   <a routerLink="/preview"><button class="btn btn-outline-primary" >Aggregate</button></a>
-</div>
+</div>-->
+
+

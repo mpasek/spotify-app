@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { SpotifyService} from '../../services/spotify.service';
-import { Option } from '../../../Option';
-import { Timeframe } from '../../../Timeframe';
 import {Result} from "../../../Result";
 import 'rxjs/add/operator/map';
+import {DropdownsService} from "../../services/dropdowns.service";
+import {DynamicFormService} from "../../services/dynamic-form.service";
+
 
 
 @Component({
@@ -13,25 +15,32 @@ import 'rxjs/add/operator/map';
 })
 
 export class DropdownsComponent implements OnInit {
+  name = 'Angular';
+
+  submittedData;
+
+  form: FormGroup;
+  payLoad = '';
+
+  controls: any[];
+
   savedRes: any;
   savedResArr: Array<Result> = [];
   tracksArr: Array<any> = [];
 
-  selectedOption: Option = new Option(0, 'Custom');
-  options: Option[];
-  timeframes: Timeframe[];
-
-  constructor(private _spotifyService: SpotifyService) {
-
+  constructor(private _spotifyService: SpotifyService, dropdownsService: DropdownsService, private dynamicFormService: DynamicFormService) {
+    this.controls = dropdownsService.getQuestions();
   }
 
   ngOnInit(){
-    this.options= this._spotifyService.getOptions();
     this.getAllSavedTracks();
+    this.form = this.dynamicFormService.toFormGroup(this.controls);
   }
 
-  onSelect(optionid) {
-    this.timeframes = this._spotifyService.getDates().filter((item) => item.optionid == optionid);
+  onSubmit() {
+    this.submittedData = this.form.value;
+    console.log("Data Submitted");
+    console.log(this.submittedData);
   }
 
   getAllSavedTracks() {
@@ -95,5 +104,6 @@ export class DropdownsComponent implements OnInit {
 
   insertSortedBy = (a, v, i) => a.splice(this.sortedIndexBy(a, v, i), 0, v);
 
-
 }
+
+

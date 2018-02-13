@@ -16,6 +16,10 @@ import { SuccessComponent } from './components/success/success.component';
 import { InfoComponent } from './components/info/info.component';
 
 
+
+import { DynamicFormModule } from './components/dynamic-form/dynamic-form.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +37,8 @@ import { InfoComponent } from './components/info/info.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DynamicFormModule
   ],
   providers: [],
   bootstrap: [AppComponent]
