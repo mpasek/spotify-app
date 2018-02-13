@@ -12,28 +12,50 @@ export class DropdownsService {
     let questions: BaseModel<any>[] = [
 
       new Dropdown({
-        key: 'dropdown',
+        key: 'month',
         label: 'Month',
         options: [
           { key: 'select', value: '-- SELECT --' },
-          { key: 'jan', value: 'January' },
-          { key: 'feb', value: 'February' },
-          { key: 'mar', value: 'March' },
-          { key: 'apr', value: 'April' },
-          { key: 'may', value: 'May' },
-          { key: 'jun', value: 'June' },
-          { key: 'jul', value: 'July' },
-          { key: 'aug', value: 'August' },
-          { key: 'sep', value: 'September' },
-          { key: 'oct', value: 'October' },
-          { key: 'nov', value: 'November' },
-          { key: 'dec', value: 'December' },
+          { key: 'January', value: 'January' },
+          { key: 'February', value: 'February' },
+          { key: 'March', value: 'March' },
+          { key: 'April', value: 'April' },
+          { key: 'May', value: 'May' },
+          { key: 'June', value: 'June' },
+          { key: 'July', value: 'July' },
+          { key: 'August', value: 'August' },
+          { key: 'September', value: 'September' },
+          { key: 'October', value: 'October' },
+          { key: 'November', value: 'November' },
+          { key: 'December', value: 'December' },
         ],
         order: 1
       }),
 
       new Dropdown({
-        key: 'dropdown1',
+        key: 'year',
+        label: 'Year',
+        options: [
+          { key: 'select', value: '-- SELECT --' },
+          { key: '2008', value: '2008' },
+          { key: '2009', value: '2009' },
+          { key: '2010', value: '2010' },
+          { key: '2011', value: '2011' },
+          { key: '2012', value: '2012' },
+          { key: '2013', value: '2013' },
+          { key: '2014', value: '2014' },
+          { key: '2015', value: '2015' },
+          { key: '2016', value: '2016' },
+          { key: '2017', value: '2017' },
+          { key: '2018', value: '2018' },
+        ],
+        order: 2
+      }),
+
+
+      // TODO: This is in place for when implementing the dynamic dropdowns
+      /*new Dropdown({
+        key: 'year1',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -50,14 +72,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'jan',
         },
         order: 2
       }),
 
       new Dropdown({
-        key: 'dropdown2',
+        key: 'year2',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -74,14 +96,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'feb',
         },
         order: 3
       }),
 
       new Dropdown({
-        key: 'dropdown3',
+        key: 'year3',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -98,14 +120,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'mar',
         },
         order: 4
       }),
 
       new Dropdown({
-        key: 'dropdown4',
+        key: 'year4',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -122,14 +144,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'apr',
         },
         order: 5
       }),
 
       new Dropdown({
-        key: 'dropdown5',
+        key: 'year5',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -146,14 +168,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'may',
         },
         order: 6
       }),
 
       new Dropdown({
-        key: 'dropdown6',
+        key: 'year6',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -170,14 +192,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'jun',
         },
         order: 7
       }),
 
       new Dropdown({
-        key: 'dropdown7',
+        key: 'year7',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -194,14 +216,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'jul',
         },
         order: 8
       }),
 
       new Dropdown({
-        key: 'dropdown8',
+        key: 'year8',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -218,14 +240,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'aug',
         },
         order: 9
       }),
 
       new Dropdown({
-        key: 'dropdown9',
+        key: 'year9',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -242,14 +264,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'sep',
         },
         order: 10
       }),
 
       new Dropdown({
-        key: 'dropdown10',
+        key: 'year10',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -266,14 +288,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'oct',
         },
         order: 11
       }),
 
       new Dropdown({
-        key: 'dropdown11',
+        key: 'year11',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -290,14 +312,14 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'nov',
         },
         order: 12
       }),
 
       new Dropdown({
-        key: 'dropdown12',
+        key: 'year12',
         label: 'Year',
         options: [
           { key: 'select', value: '-- SELECT --' },
@@ -314,13 +336,13 @@ export class DropdownsService {
           { key: '2018', value: '2018' },
         ],
         showWhen: {
-          key: 'dropdown',
+          key: 'month',
           value: 'dec',
         },
         order: 13
-      }),
+      }),*/
 
-    ]
+    ];
 
     return questions.sort((a, b) => a.order - b.order);
   }

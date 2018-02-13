@@ -15,13 +15,12 @@ import {DynamicFormService} from "../../services/dynamic-form.service";
 })
 
 export class DropdownsComponent implements OnInit {
-  name = 'Angular';
+  pageName = 'Aggregatr';
+  pageVisited: boolean = false;
 
   submittedData;
-
   form: FormGroup;
   payLoad = '';
-
   controls: any[];
 
   savedRes: any;
@@ -33,7 +32,10 @@ export class DropdownsComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.getAllSavedTracks();
+    // Need to figure out way to only load on the first time the page visited
+    if(this.pageVisited === false) {
+      this.getAllSavedTracks();
+    }
     this.form = this.dynamicFormService.toFormGroup(this.controls);
   }
 
@@ -41,7 +43,53 @@ export class DropdownsComponent implements OnInit {
     this.submittedData = this.form.value;
     console.log("Data Submitted");
     console.log(this.submittedData);
+    this.parseInput(this.submittedData);
   }
+
+  parseInput(data) {
+    let month = data.month;
+    let year = data.year;
+    let daysInMonth;
+    let string1, string2;
+    let time1, time2;
+    let t1_milli, t2_milli;
+
+    if(month !== 'select' && year !== 'select') {
+
+      if(month === 'February') {
+        if(year === '2008' || year === '2012' || year === '2016') {
+          daysInMonth = 29;
+        } else {
+          daysInMonth = 28;
+        }
+      } else {
+        if(month === 'January' || month === 'March' || month === 'May' || month === 'July' ||
+            month === 'August' || month === 'October' || month === 'December') {
+          daysInMonth = 31;
+        } else {
+          daysInMonth = 30;
+        }
+      }
+      string1 = month + " 1, " + year + " 00:00:01";
+      string2 = month + " " + daysInMonth + ", " + year + " 23:59:59";
+      console.log("s1: " + string1);
+      console.log("s2: " + string2);
+
+      // Get upper and lower bounds of the month
+      time1 = new Date(string1);
+      time2 = new Date(string2);
+
+      // Convert to milliseconds
+      t1_milli = time1.getTime();
+      t2_milli = time2.getTime();
+
+      console.log("t1: " + t1_milli);
+      console.log("t2: " + t2_milli);
+
+    }
+
+  }
+
 
   getAllSavedTracks() {
     let numberSaved = this._spotifyService.getUser().totalSaved;
@@ -58,10 +106,11 @@ export class DropdownsComponent implements OnInit {
           }
         });
     }
+    this.pageVisited = true;
   }
 
   sortedIndexBy(array, value, iteratee) {
-    const MAX_ARRAY_LENGTH = 4294967295;
+    const MAX_ARRAY_LENGTH = 1000000000;
     const MAX_ARRAY_INDEX = MAX_ARRAY_LENGTH - 1;
 
     let retHighest = true;
