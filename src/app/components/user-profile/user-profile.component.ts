@@ -40,21 +40,14 @@ import 'rxjs/Rx';
 })
 export class UserProfileComponent implements OnInit {
   user: User;
-  animationInitialized: boolean = false;
 
   artistRes: any;
   tracksRes: any;
   numberSavedRes: any;
-  savedRes: any;
 
   items: any;
   trackItems: any;
   numberOfSaved: number;
-  tracks: any;
-
-  topArtists: any[];
-  topTracks: Track[];
-  savedTracks: Track[];
 
   constructor(private _spotifyService: SpotifyService) {
 
@@ -65,10 +58,6 @@ export class UserProfileComponent implements OnInit {
     this.getTopArtists();
     this.getTopTracks();
     this.getNumberOfSavedTracks();
-  }
-
-  getUserInfo() {
-    return this.user;
   }
 
   getTopArtists() {
@@ -98,7 +87,6 @@ export class UserProfileComponent implements OnInit {
         this.numberSavedRes = res;
         this.user.totalSaved = res['total'];
         this.numberOfSaved = this.user.totalSaved;
-        console.log(this.numberOfSaved);
       });
   }
 

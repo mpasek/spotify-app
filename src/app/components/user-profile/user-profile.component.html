@@ -9,7 +9,7 @@
   <div class="row">
     <div [@artistsEnter]="items.length">
       <h2>Top Artists</h2>
-      <div class="col-6" *ngFor="let item of items">
+      <div class="col-4" *ngFor="let item of items">
         <div *ngIf="item.images.length > 0">
           <div>
             <h3><a href="{{item.external_urls.spotify}}">{{item.name}}</a></h3>
@@ -22,7 +22,7 @@
 
     <div [@tracksEnter]="trackItems.length">
       <h2>Top Tracks</h2>
-      <div class="col-6" *ngFor="let track of trackItems">
+      <div class="col-4" *ngFor="let track of trackItems">
         <div *ngIf="track.album.images.length > 0">
           <div>
             <h3><a href="{{track.artists[0].external_urls.spotify}}">{{track.artists[0].name}}</a></h3>
@@ -32,6 +32,11 @@
         </div>
       </div>
     </div>
+
+    <div class="col-4">
+      <a routerLink="/aggregatr"><button class="btn btn-outline-primary" >Make Playlists</button></a>
+    </div>
+
 
   </div>
 

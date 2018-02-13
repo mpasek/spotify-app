@@ -4,6 +4,8 @@ import { User } from '../../User';
 import 'rxjs/add/operator/map';
 import {Option} from "../../Option";
 import {Timeframe} from "../../Timeframe";
+import {Observable} from 'rxjs/observable';
+import 'rxjs/add/observable/forkJoin'
 
 @Injectable()
 export class SpotifyService {
@@ -69,6 +71,30 @@ export class SpotifyService {
       .get(savedTracksUrl, {headers: this._headers});
   }
 
+  getAllUserSavedTracks(offset: number){
+    console.log('Offset: ' + offset);
+
+    let savedTracksUrl = this._baseUrl + '/tracks?limit=50&offset=' + offset;
+    return this._http.get(savedTracksUrl, {headers: this._headers});
+
+    /*for(let offset = 0, i=0; offset <= this._user.totalSaved; offset += 50, i++) {
+      let savedTracksUrl = this._baseUrl + '/tracks?limit=50&offset=' + offset;
+      this._http.get(savedTracksUrl, {headers: this._headers})
+        .pipe(res => {
+          userSaved.push(res);
+          console.log('Res in get: ' + res);
+        });
+    }
+    console.log('User Saved: ' + userSaved);
+    return Observable.forkJoin(userSaved);*/
+  }
+
+  /*getAllUserSavedTracks() {
+    let savedTracksUrl = this._baseUrl + '/tracks?limit=50&offset=0';
+    return this._http
+      .get(savedTracksUrl, {headers: this._headers});
+  }*/
+
 
 
   getOptions() {
@@ -108,15 +134,5 @@ export class SpotifyService {
       new Timeframe(25, 2, '2018' ),
     ];
   }
-
-
-  /*getUserInfo(user: User){
-   this.accessToken = user.accessToken;
-   let url = this.baseUrl;
-   let headers = new Headers();
-   headers.append('Authorization' , 'Bearer ' + this.accessToken);
-   return this._http.get(url, {headers: headers})
-   .map((res: Response) => res.json());
-   }*/
 
 }
