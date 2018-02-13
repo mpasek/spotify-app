@@ -1,7 +1,6 @@
+import { TrackInfo } from './TrackInfo';
+
 export class Track {
-  name: string;
-  artist: string;
-  duration: number;
-  uri: string;
-  previewUrl: string;
+  date: Date;
+  track: TrackInfo;
 }

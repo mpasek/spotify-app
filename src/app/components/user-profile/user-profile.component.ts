@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, stagger, transition, animate, query, keyframes } from '@angular/animations';
 import { SpotifyService } from '../../services/spotify.service';
 import {User} from "../../../User";
-import {Track} from "../../../Track";
 import 'rxjs/Rx';
 
 @Component({

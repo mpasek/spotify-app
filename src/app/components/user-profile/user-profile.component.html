@@ -7,7 +7,7 @@
   </div>
 
   <div class="row">
-    <div [@artistsEnter]="items.length">
+    <div [@artistsEnter]="items?.length">
       <h2>Top Artists</h2>
       <div class="col-4" *ngFor="let item of items">
         <div *ngIf="item.images.length > 0">
@@ -20,7 +20,7 @@
 
     </div>
 
-    <div [@tracksEnter]="trackItems.length">
+    <div [@tracksEnter]="trackItems?.length">
       <h2>Top Tracks</h2>
       <div class="col-4" *ngFor="let track of trackItems">
         <div *ngIf="track.album.images.length > 0">
