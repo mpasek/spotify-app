@@ -1,5 +1,43 @@
-<div>
-  <label>Create and Save to Spotify</label>
-  <br/><br/>
-  <a routerLink="/success"><button class="btn btn-success pull-right" >Create</button></a>
+<div class="container" id="playlist-preview">
+  <div class="row">
+    <div class="col">
+      <h1>{{pageName}}</h1>
+      <h5>{{subtitle}}</h5>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-3"></div>
+
+    <div class="col-6" [@tracksEnter]="aggregatedTracks?.length">
+      <div *ngFor="let track of aggregatedTracks">
+        <div>
+        <!--<div *ngIf="track.album.images.length > 0">-->
+          <div class="col-2">
+            <img style="width: 200px; display: block;" src="../../../assets/images/music.svg">
+          </div>
+          <div class="col-2">
+            <h3>{{track.artists[0].name}}</h3>
+            <h5>{{track.name}}</h5>
+            <h6>{{track.album.name}}</h6>
+          </div>
+
+          <div class="col-2">
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <label>Create and Save to Spotify</label>
+      <br/><br/>
+      <a routerLink="/success"><button class="btn btn-outline-primary" >Create</button></a>
+    </div>
+
+  </div>
+
+
+
 </div>

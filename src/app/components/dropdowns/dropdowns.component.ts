@@ -54,6 +54,7 @@ export class DropdownsComponent implements OnInit {
   onSubmit() {
     this.submittedData = this.form.value;
     this.parseInput(this.submittedData);
+    this._playlistService.setDate(this.submittedData);
     this.router.navigateByUrl('/preview');
   }
 

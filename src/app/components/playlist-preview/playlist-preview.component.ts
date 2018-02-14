@@ -1,13 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import {SpotifyService} from "../../services/spotify.service";
 import {PlaylistService} from "../../services/playlist.service";
+import { trigger, state, style, stagger, transition, animate, query, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-playlist-preview',
   templateUrl: './playlist-preview.component.html',
-  styleUrls: ['./playlist-preview.component.css']
+  styleUrls: ['./playlist-preview.component.css'],
+  animations: [
+    trigger('tracksEnter', [
+      transition('* => *', [
+
+        query(':enter', style({ opacity: 0 }), {optional: true}),
+
+        query(':enter', stagger('200ms', [
+          animate('700ms ease-in', keyframes([
+            style({opacity: 0, transform: 'translateY(-20%)', offset: 0}),
+            style({opacity: .5, transform: 'translateY(35px)',  offset: 0.25}),
+            style({opacity: 1, transform: 'translateY(0)',     offset: 1.0}),
+          ]))]), {optional: true})
+      ])
+    ]),
+  ]
 })
 export class PlaylistPreviewComponent implements OnInit {
+  pageName: string = 'Playlist Preview';
+  subtitle: string;
   savedTracks: any;
   queryInfo: any;
   aggregatedTracks: Array<any> = [];
@@ -21,8 +39,9 @@ export class PlaylistPreviewComponent implements OnInit {
     });
     this._playlistService.currentSavedTracks.subscribe(savedTracks => this.savedTracks = savedTracks);
 
-    console.log('saved');
     console.log(this.savedTracks);
+    let date = this._playlistService.getDate();
+    this.subtitle = date.month + " " + date.year;
     this.aggregateIntoPlaylist();
   }
 
