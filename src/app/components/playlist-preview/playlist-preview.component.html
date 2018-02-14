@@ -3,6 +3,7 @@
     <div class="col">
       <h1>{{pageName}}</h1>
       <h5>{{subtitle}}</h5>
+      <h6>Number of Tracks Saved: {{numberSaved}}</h6>
     </div>
   </div>
 
@@ -32,8 +33,11 @@
 
     <div class="col-3">
       <label>Create and Save to Spotify</label>
+      <a routerLink="/success"><button class="btn btn-outline-primary">Create</button></a>
       <br/><br/>
-      <a routerLink="/success"><button class="btn btn-outline-primary" >Create</button></a>
+      <label>Choose New Dates</label>
+      <a routerLink="/aggregatr"><button class="btn btn-outline-secondary">Go Back</button></a>
+
     </div>
 
   </div>

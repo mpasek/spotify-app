@@ -7,6 +7,7 @@ import {User} from "../../../User";
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.css']
 })
+
 export class InfoComponent implements OnInit {
   private _accessToken: string;
   user: User;
@@ -18,11 +19,10 @@ export class InfoComponent implements OnInit {
 
   ngOnInit() {
     this.user = new User();
+
     // Gets access token from url
     let urlParams = new URLSearchParams(window.location.search);
     this._accessToken = urlParams.get('access_token');
-    console.log("Access token: " + this._accessToken);
-
     this.user.accessToken = this._accessToken;
 
     //this._accessToken = window.localStorage.getItem('access_token');

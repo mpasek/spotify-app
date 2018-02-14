@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SpotifyService} from "../../services/spotify.service";
 import {PlaylistService} from "../../services/playlist.service";
-import { trigger, state, style, stagger, transition, animate, query, keyframes } from '@angular/animations';
+import { trigger, style, stagger, transition, animate, query, keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-playlist-preview',
@@ -26,11 +25,13 @@ import { trigger, state, style, stagger, transition, animate, query, keyframes }
 export class PlaylistPreviewComponent implements OnInit {
   pageName: string = 'Playlist Preview';
   subtitle: string;
+
+  numberSaved: number = 0;
   savedTracks: any;
   queryInfo: any;
   aggregatedTracks: Array<any> = [];
 
-  constructor(private _spotifyService: SpotifyService, private _playlistService: PlaylistService) { }
+  constructor(private _playlistService: PlaylistService) { }
 
   ngOnInit() {
     this._playlistService.currentQueryInfo.subscribe(queryInfo => {
@@ -42,6 +43,7 @@ export class PlaylistPreviewComponent implements OnInit {
     console.log(this.savedTracks);
     let date = this._playlistService.getDate();
     this.subtitle = date.month + " " + date.year;
+    this._playlistService.setName(this.subtitle);
     this.aggregateIntoPlaylist();
   }
 
@@ -58,13 +60,15 @@ export class PlaylistPreviewComponent implements OnInit {
 
       if(dateInMil >= t1 && dateInMil <= t2) {
         this.aggregatedTracks.push(track);
+        this.numberSaved++;
         console.log(track);
       }
+      
 
     }
 
     console.log('Number of track in playlist: ' + this.aggregatedTracks.length);
-
+    this._playlistService.setAggregatedTracks(this.aggregatedTracks);
   }
 
 }

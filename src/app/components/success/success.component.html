@@ -1,9 +1,41 @@
-<div>
-  <a routerLink="/aggregatr"><button class="btn btn-success pull-right" >Make New Playlist</button></a>
+<div class="container" id="success">
+  <div class="row">
+    <div class="col">
+      <h1>{{pageName}}</h1>
+      <h3>{{subtitle}}</h3>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-3"></div>
+
+    <div class="col-6" >
+      <div>
+        <!--<button class="btn btn-outline-primary" (click)="onNavigate()">Check Out Your New Playlist</button>-->
+        <a href="{{playlistPath}}"><button class="btn btn-outline-primary">Check Out Your New Playlist</button></a>
+      </div>
+      <br/>
+      <div>
+        <a routerLink="/aggregatr"><button class="btn btn-outline-primary" >Make New Playlist</button></a>
+      </div>
+      <br/>
+      <div>
+        <a routerLink="/{{userPath}}" ><button class="btn btn-outline-primary" >Back to Profile</button></a>
+      </div>
+    </div>
+
+    <div class="col-3"></div>
+
+  </div>
+
+
+
 </div>
+
+
+
+
 
 <br/>
 
-<div>
-  <a routerLink="/{{path}}" ><button class="btn btn-success pull-right" >Back to Profile</button></a>
-</div>

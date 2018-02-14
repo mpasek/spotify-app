@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, stagger, transition, animate, query, keyframes } from '@angular/animations';
+import { trigger, style, stagger, transition, animate, query, keyframes } from '@angular/animations';
 import { SpotifyService } from '../../services/spotify.service';
 import {User} from "../../../User";
 import 'rxjs/Rx';
@@ -37,13 +37,13 @@ import 'rxjs/Rx';
     ])
   ],
 })
+
+
 export class UserProfileComponent implements OnInit {
   user: User;
-
   artistRes: any;
   tracksRes: any;
   numberSavedRes: any;
-
   items: any;
   trackItems: any;
   numberOfSaved: number;

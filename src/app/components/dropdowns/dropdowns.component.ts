@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SpotifyService} from '../../services/spotify.service';
-import {Result} from "../../../Result";
 import 'rxjs/add/operator/map';
 import {DropdownsService} from "../../services/dropdowns.service";
 import {DynamicFormService} from "../../services/dynamic-form.service";
 import {PlaylistService} from "../../services/playlist.service";
-
 import {Router} from '@angular/router';
-
-
 
 @Component({
   selector: 'app-dropdowns',
@@ -18,25 +14,23 @@ import {Router} from '@angular/router';
 })
 
 export class DropdownsComponent implements OnInit {
-  savedTracks: any;
-  queryInfo: Object = {};
-
-  query: any;
-
   pageName = 'Aggregatr';
   pageVisited: boolean = false;
+
+  savedTracks: any;
+  queryInfo: Object = {};
+  query: any;
   t1_mil: number;
   t2_mil: number;
-
   submittedData;
   form: FormGroup;
   controls: any[];
-
   savedRes: any;
   tracksArr: Array<any> = [];
 
   constructor(private _spotifyService: SpotifyService, dropdownsService: DropdownsService,
-              private dynamicFormService: DynamicFormService, private _playlistService: PlaylistService, private router: Router) {
+              private dynamicFormService: DynamicFormService, private _playlistService: PlaylistService,
+              private router: Router) {
 
     this.controls = dropdownsService.getQuestions();
   }
