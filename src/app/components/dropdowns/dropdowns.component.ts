@@ -14,7 +14,6 @@ import {Router} from '@angular/router';
 })
 
 export class DropdownsComponent implements OnInit {
-  pageName = 'Aggregatr';
   pageVisited: boolean = false;
 
   savedTracks: any;

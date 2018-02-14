@@ -23,7 +23,6 @@ import { trigger, style, stagger, transition, animate, query, keyframes } from '
   ]
 })
 export class PlaylistPreviewComponent implements OnInit {
-  pageName: string = 'Playlist Preview';
   subtitle: string;
 
   numberSaved: number = 0;

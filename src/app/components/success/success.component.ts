@@ -12,8 +12,6 @@ import {PlaylistService} from "../../services/playlist.service";
 export class SuccessComponent implements OnInit {
   private _user: User;
 
-  pageName: string = 'Success';
-  subtitle: string = 'Playlist Added to Your Library';
   userPath: string;
   playlistPath: string;
   playlistName: string;
@@ -42,16 +40,18 @@ export class SuccessComponent implements OnInit {
         console.log(res);
         this.createRes = res;
         let playlistId = res['id'];
+        let aggregatedTracks = this._playlistService.getAggregatedTracks();
         this.playlistPath = res['href'];
         console.log(this.playlistPath);
+        let splicedTracks;
 
-        // Max request size is 100, split requests if over
-        if(this.size > 100) {
-          this.size = this.size - 100;
-          this.populateNewPlaylist(this._playlistService.getAggregatedTracks(), playlistId);
-        } else {
-          this.populateNewPlaylist(this._playlistService.getAggregatedTracks(), playlistId);
+        // Max post size is 100, split requests if over
+        while(this.size > 100) {
+          this.size -= 100;
+          splicedTracks = aggregatedTracks.splice(0, 100);
+          this.populateNewPlaylist(splicedTracks, playlistId);
         }
+          this.populateNewPlaylist(aggregatedTracks, playlistId);
       });
 
   }
