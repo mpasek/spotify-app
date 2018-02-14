@@ -5,6 +5,9 @@ import {Result} from "../../../Result";
 import 'rxjs/add/operator/map';
 import {DropdownsService} from "../../services/dropdowns.service";
 import {DynamicFormService} from "../../services/dynamic-form.service";
+import {PlaylistService} from "../../services/playlist.service";
+
+import {Router} from '@angular/router';
 
 
 
@@ -15,19 +18,26 @@ import {DynamicFormService} from "../../services/dynamic-form.service";
 })
 
 export class DropdownsComponent implements OnInit {
+  savedTracks: any;
+  queryInfo: Object = {};
+
+  query: any;
+
   pageName = 'Aggregatr';
   pageVisited: boolean = false;
+  t1_mil: number;
+  t2_mil: number;
 
   submittedData;
   form: FormGroup;
-  payLoad = '';
   controls: any[];
 
   savedRes: any;
-  savedResArr: Array<Result> = [];
   tracksArr: Array<any> = [];
 
-  constructor(private _spotifyService: SpotifyService, dropdownsService: DropdownsService, private dynamicFormService: DynamicFormService) {
+  constructor(private _spotifyService: SpotifyService, dropdownsService: DropdownsService,
+              private dynamicFormService: DynamicFormService, private _playlistService: PlaylistService, private router: Router) {
+
     this.controls = dropdownsService.getQuestions();
   }
 
@@ -37,13 +47,14 @@ export class DropdownsComponent implements OnInit {
       this.getAllSavedTracks();
     }
     this.form = this.dynamicFormService.toFormGroup(this.controls);
+    this._playlistService.currentSavedTracks.subscribe(savedTracks => this.savedTracks = savedTracks);
+    this._playlistService.currentQueryInfo.subscribe(queryInfo => this.queryInfo = queryInfo);
   }
 
   onSubmit() {
     this.submittedData = this.form.value;
-    console.log("Data Submitted");
-    console.log(this.submittedData);
     this.parseInput(this.submittedData);
+    this.router.navigateByUrl('/preview');
   }
 
   parseInput(data) {
@@ -52,7 +63,6 @@ export class DropdownsComponent implements OnInit {
     let daysInMonth;
     let string1, string2;
     let time1, time2;
-    let t1_milli, t2_milli;
 
     if(month !== 'select' && year !== 'select') {
 
@@ -80,12 +90,18 @@ export class DropdownsComponent implements OnInit {
       time2 = new Date(string2);
 
       // Convert to milliseconds
-      t1_milli = time1.getTime();
-      t2_milli = time2.getTime();
+      this.t1_mil = time1.getTime();
+      this.t2_mil = time2.getTime();
 
-      console.log("t1: " + t1_milli);
-      console.log("t2: " + t2_milli);
+      let query = {
+        t1: this.t1_mil,
+        t2: this.t2_mil
+      };
 
+      console.log("t1: " + query.t1);
+      console.log("t2: " + query.t2);
+
+      this._playlistService.updateQueryInfo(query);
     }
 
   }
@@ -101,8 +117,7 @@ export class DropdownsComponent implements OnInit {
           console.log(this.savedRes.items);
           for (let i = 0; i < this.savedRes.items.length; i++) {
             this.insertSortedBy(this.tracksArr, this.savedRes.items[i], function(o) { return o['added_at']; });
-
-            console.log(this.tracksArr);
+            this._playlistService.updateSavedTracks(this.tracksArr);
           }
         });
     }

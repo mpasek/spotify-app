@@ -18,6 +18,9 @@ import { InfoComponent } from './components/info/info.component';
 
 
 import { DynamicFormModule } from './components/dynamic-form/dynamic-form.module';
+import {SpotifyService} from "./services/spotify.service";
+import {DropdownsService} from "./services/dropdowns.service";
+import {PlaylistService} from "./services/playlist.service";
 
 
 @NgModule({
@@ -40,7 +43,7 @@ import { DynamicFormModule } from './components/dynamic-form/dynamic-form.module
     BrowserAnimationsModule,
     DynamicFormModule
   ],
-  providers: [],
+  providers: [SpotifyService, DropdownsService, PlaylistService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
