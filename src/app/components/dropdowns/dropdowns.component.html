@@ -1,37 +1,20 @@
 <div class="container">
-
-  <h1 class="title">Aggregate by Date</h1>
-  <h4>Select the Month and Year</h4>
-  <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div *ngFor="let control of controls" class="form-row">
-      <dynamic-control [input]="control" [form]="form"></dynamic-control>
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+      <h1 class="title" style="padding-top: 50px">Aggregate by Date</h1>
+      <h5 class="text-muted" style="padding-bottom: 30px">Select the Month and Year</h5>
+      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <div *ngFor="let control of controls" class="form-row">
+          <dynamic-control [form]="form" [input]="control"></dynamic-control>
+        </div>
+        <div class="form-row" style="padding-top: 40px">
+          <button class="btn btn-outline-primary" [disabled]="!form.valid" >Aggregate</button>
+        </div>
+      </form>
     </div>
-    <div class="form-row">
-<!--
-      <button type="submit" class="btn btn-outline-primary" [disabled]="!form.valid">Aggregate</button>
--->
-      <!--<a routerLink="/preview">--><button class="btn btn-outline-primary" [disabled]="!form.valid" >Aggregate</button><!--</a>-->
-    </div>
-  </form>
-
+    <div class="col-3"></div>
+  </div>
 </div>
 
 
-
-<!--<form (ngSubmit)="onSubmit()" [formGroup]="form">
-  <fieldset>
-    <legend class="title">{{pageName}}</legend>
-
-    <div class="form-group">
-      <label for="exampleSelect1">Example select</label>
-      <select *ngFor="let control of controls" class="form-control form-row" id="exampleSelect1">
-        <dynamic-control [input]="control" [form]="form"></dynamic-control>
-      </select>
-      <div class="form-row">
-        &lt;!&ndash;<button type="submit" class="btn btn-outline-primary" [disabled]="!form.valid">Aggregate</button>&ndash;&gt;
-        &lt;!&ndash;<a routerLink="/preview">&ndash;&gt;<button class="btn btn-outline-primary" [disabled]="!form.valid" >Aggregate</button>&lt;!&ndash;</a>&ndash;&gt;
-      </div>
-    </div>
-
-  </fieldset>
-</form>-->

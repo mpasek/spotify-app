@@ -15,8 +15,6 @@ import { PlaylistPreviewComponent } from './components/playlist-preview/playlist
 import { SuccessComponent } from './components/success/success.component';
 import { InfoComponent } from './components/info/info.component';
 
-
-
 import { DynamicFormModule } from './components/dynamic-form/dynamic-form.module';
 import {SpotifyService} from "./services/spotify.service";
 import {DropdownsService} from "./services/dropdowns.service";

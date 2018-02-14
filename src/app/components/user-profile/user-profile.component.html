@@ -1,80 +1,64 @@
-<div class="container" id="user-profile">
+<div id="user-profile">
   <div class="row">
-    <div class="col">
+    <div class="col-1"></div>
+    <div class="col-10 jumbotron">
       <h1>{{user.displayName}}</h1>
-      <h5>Number of Saved Tracks: {{numberOfSaved}}</h5>
+      <span><a routerLink="/aggregatr"><button class="btn btn-outline-primary" >Make Playlists</button></a></span>
+      <h5 class="text-muted">Number of Saved Tracks: {{numberOfSaved}}</h5>
     </div>
+    <div class="col-1"></div>
   </div>
 
   <div class="row">
-    <div [@artistsEnter]="items?.length">
-      <h2>Top Artists</h2>
-      <div class="col-4" *ngFor="let item of items">
-        <div *ngIf="item.images.length > 0">
-          <div>
-            <h3><a href="{{item.external_urls.spotify}}">{{item.name}}</a></h3>
-            <img style="width: 200px; display: block;" src="{{item.images[0].url}}">
-          </div>
-        </div>
-    </div>
+    <div class="col-1"></div>
+    <div class="col-10"><h2 class="subtitle">Top Artists</h2><hr></div>
+    <div class="col-1"></div>
+  </div>
 
-    </div>
-
-    <div [@tracksEnter]="trackItems?.length">
-      <h2>Top Tracks</h2>
-      <div class="col-4" *ngFor="let track of trackItems">
-        <div *ngIf="track.album.images.length > 0">
-          <div>
-            <h3><a href="{{track.artists[0].external_urls.spotify}}">{{track.artists[0].name}}</a></h3>
-            <h5>{{track.album.name}}</h5>
-            <img style="width: 200px; display: block;" src="{{track.album.images[0].url}}">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div [@artistsEnter]="items?.length">
+        <div class="row">
+          <div *ngFor="let item of items, let i = index">
+            <div class="clearfix" *ngIf="item.images.length > 0 && i % 5 == 0"></div>
+            <div class="col-sm-2">
+              <h4><a href="{{item.external_urls.spotify}}">{{item.name}}</a></h4>
+              <img style="width: 230px; display: inline-block" src="{{item.images[0].url}}">
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="col-1"></div>
+  </div>
 
-    <div class="col-4">
-      <a routerLink="/aggregatr"><button class="btn btn-outline-primary" >Make Playlists</button></a>
-    </div>
-
-
+  <div class="row" style="margin-top: 70px">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <h2 class="subtitle">Top Tracks</h2><hr></div>
+    <div class="col-1"></div>
   </div>
 
   <div class="row">
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div [@tracksEnter]="trackItems?.length">
+        <div class="row">
+          <div *ngFor="let track of trackItems, let i = index">
+            <div class="clearfix" *ngIf="track.album.images.length > 0 && i % 5 == 0"></div>
+            <div class="col-sm-2">
+              <h4><a href="{{track.artists[0].external_urls.spotify}}">{{track.artists[0].name}}</a></h4>
+              <h5>{{track.album.name}}</h5>
+              <img style="max-width: 230px; display: block;" src="{{track.album.images[0].url}}">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
   </div>
 </div>
-
-
-
-
-
-
-
-  <!--<header class="artist-header">
-
-    <li >
-
-    </li>
-
-    <li *ngFor="let item of items">
-      <div *ngIf="item.images.length > 0">
-        <div>
-          <h3><a href="{{item.external_urls.spotify}}">{{item.name}}</a></h3>
-          <img style="width: 200px; display: block;" src="{{item.images[0].url}}">
-        </div>
-      </div>
-    </li>
-
-  </header>
-
-    <div class="media-body">
-      <ul class="ul-horizontal">
-        <a routerLink="/aggregatr"><button class="btn btn-success" >Make Playlists</button></a>
-      </ul>
-    </div>-->
 
 
 

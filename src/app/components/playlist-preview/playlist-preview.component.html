@@ -1,9 +1,9 @@
 <div class="container" id="playlist-preview">
   <div class="row">
-    <div class="col">
+    <div class="col" style="padding-top: 40px">
       <h1>Playlist Preview</h1>
       <h5>{{subtitle}}</h5>
-      <h6>Number of Tracks Saved: {{numberSaved}}</h6>
+      <h6 class="text-muted">Number of Tracks Saved: {{numberSaved}}</h6><hr>
     </div>
   </div>
 
@@ -15,14 +15,14 @@
       <div *ngFor="let track of aggregatedTracks">
         <div>
         <!--<div *ngIf="track.album.images.length > 0">-->
-          <div class="col-2">
-            <img style="width: 200px; display: block;" src="../../../assets/images/music.svg">
-          </div>
-          <div class="col-2">
+          <span class="col-2">
+            <img style="width: 125px; display: block;" src="../../../assets/images/music.svg">
+          </span>
+          <span class="col-2 clearfix">
             <h3>{{track.artists[0].name}}</h3>
             <h5>{{track.name}}</h5>
             <h6>{{track.album.name}}</h6>
-          </div>
+          </span>
 
           <div class="col-2">
 
