@@ -22,7 +22,7 @@
         <div class="row">
           <div *ngFor="let item of items, let i = index">
             <div class="clearfix" *ngIf="item.images.length > 0 && i % 5 == 0"></div>
-            <div class="col-sm-2">
+            <div class="col-sm-2" style="padding: 10px">
               <h4><a href="{{item.external_urls.spotify}}">{{item.name}}</a></h4>
               <img style="width: 230px; display: inline-block" src="{{item.images[0].url}}">
             </div>
@@ -47,9 +47,9 @@
         <div class="row">
           <div *ngFor="let track of trackItems, let i = index">
             <div class="clearfix" *ngIf="track.album.images.length > 0 && i % 5 == 0"></div>
-            <div class="col-sm-2">
+            <div class="col-sm-2" style="padding: 10px">
               <h4><a href="{{track.artists[0].external_urls.spotify}}">{{track.artists[0].name}}</a></h4>
-              <h5>{{track.album.name}}</h5>
+              <h6>{{track.album.name}}</h6>
               <img style="max-width: 230px; display: block;" src="{{track.album.images[0].url}}">
             </div>
           </div>

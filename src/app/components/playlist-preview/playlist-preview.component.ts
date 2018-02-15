@@ -62,12 +62,20 @@ export class PlaylistPreviewComponent implements OnInit {
         this.numberSaved++;
         console.log(track);
       }
-      
+
 
     }
 
     console.log('Number of track in playlist: ' + this.aggregatedTracks.length);
     this._playlistService.setAggregatedTracks(this.aggregatedTracks);
+  }
+
+  isValid() {
+    if(this.numberSaved === 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
 }

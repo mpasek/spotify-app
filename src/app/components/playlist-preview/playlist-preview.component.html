@@ -33,7 +33,7 @@
 
     <div class="col-3">
       <label>Create and Save to Spotify</label>
-      <a routerLink="/success"><button class="btn btn-outline-primary">Create</button></a>
+      <a routerLink="/success"><button [disabled]="!isValid()" class="btn btn-outline-primary">Create</button></a>
       <br/><br/>
       <label>Choose New Dates</label>
       <a routerLink="/aggregatr"><button class="btn btn-outline-secondary">Go Back</button></a>

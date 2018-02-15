@@ -3,12 +3,12 @@
     <div class="col-3"></div>
     <div class="col-6">
       <h1 class="title" style="padding-top: 50px">Aggregate by Date</h1>
-      <h5 class="text-muted" style="padding-bottom: 30px">Select the Month and Year</h5>
-      <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <h5 class="text-muted">Select the Month and Year</h5><hr>
+      <form style="padding-top: 20px" (ngSubmit)="onSubmit()" [formGroup]="form">
         <div *ngFor="let control of controls" class="form-row">
           <dynamic-control [form]="form" [input]="control"></dynamic-control>
         </div>
-        <div class="form-row" style="padding-top: 40px">
+        <div class="form-row" style="padding-top: 60px">
           <button class="btn btn-outline-primary" [disabled]="!form.valid" >Aggregate</button>
         </div>
       </form>

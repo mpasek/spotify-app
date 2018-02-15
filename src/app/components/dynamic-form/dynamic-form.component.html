@@ -1,9 +1,10 @@
 <div [formGroup]="form" [ngSwitch]="input.controlType" class="container" *ngIf="!hidden">
-  <!-- DROPDOWN -->
   <div class="col-xs-12" *ngSwitchCase="'dropdown'">
 
     <a class="info-tooltip"><i class="fa fa-question-circle" aria-hidden="true">
     </i></a>
+    <label class="control-label"
+           [attr.for]="input.key">{{input.label}}</label>
     <span class="help-block"
           *ngIf="!isValid">{{inputError}}</span>
     <select [id]="input.key"
@@ -11,8 +12,7 @@
       <option *ngFor="let opt of input.options"
               [value]="opt.key">{{opt.value}}</option>
     </select>
-    <label class="control-label"
-           [attr.for]="input.key">{{input.label}}</label>
+
   </div>
 </div>
 
