@@ -8,6 +8,7 @@ import {User} from "../../../User";
   styleUrls: ['./info.component.css']
 })
 
+
 export class InfoComponent implements OnInit {
   private _accessToken: string;
   user: User;

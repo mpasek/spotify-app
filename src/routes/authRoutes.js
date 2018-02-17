@@ -16,6 +16,9 @@ var client_id = '6197353cc3ae4b80b14c41cbd3ae7713'; // App client id
 var client_secret = 'fbe0f6e03e7640f3b8a0b9ae6566224b'; // App secret
 var redirect_uri = 'http://localhost:3000/callback'; // Your redirect uri
 var frontend_uri = 'http://localhost:4200';
+// When deployed to AWS S3
+//var redirect_uri = 'http://18.221.243.210:3000/callback';
+//var frontend_uri = 'http://www.aggregatr.co';
 
 
 authRouter.get('/login', function(req, res) {

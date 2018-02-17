@@ -51,13 +51,13 @@ export class SpotifyService {
   }
 
   getUserTopArtists(){
-    let artistsUrl = this._baseUrl + '/me/top/artists?limit=10&offset=0';
+    let artistsUrl = this._baseUrl + '/me/top/artists?limit=10&offset=0&time_range=long_term';
     return this._http
       .get(artistsUrl, {headers: this._headers});
   }
 
   getUserTopTracks() {
-    let tracksUrl = this._baseUrl + '/me/top/tracks?limit=10&offset=0';
+    let tracksUrl = this._baseUrl + '/me/top/tracks?limit=10&offset=0&time_range=long_term';
     return this._http
       .get(tracksUrl, {headers: this._headers});
   }
@@ -86,7 +86,7 @@ export class SpotifyService {
   populateNewUserPlaylist(aggregatedTracks, playlistId) {
     let playlistUrl = this._baseUrl + '/users/' + this._user.id + '/playlists/' + playlistId + '/tracks';
     let uris = [];
-    
+
     for(let i=0; i <= aggregatedTracks.length - 1; i++) {
       uris.push(aggregatedTracks[i].uri);
     }
